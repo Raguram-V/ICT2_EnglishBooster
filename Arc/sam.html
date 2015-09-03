@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+var i = 2;
+function show(){
+
+	var uname2 = document.getElementById("usrn" + i);
+	uname2.hidden = false;
+	i++;
+}
+</script>
+<form action="demo_form.asp">
+	<input type="button" value="Add" onClick="show()">
+  	<input type="submit" value="Submit" >
+    <p></p>
+   <input type="text" name="usrname1" placeholder="uname1"><br>
+   <input type="text" id="usrn2" name="usrname2" hidden="true" placeholder="uname2"><br> 
+   <input type="text" id="usrn3" name="usrname3" hidden="true" placeholder="uname3"><br>
+     
+</form>
+
+</body>
+</html>

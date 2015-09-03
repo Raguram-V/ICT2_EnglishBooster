@@ -1,0 +1,145 @@
+<?php
+
+	include 'connect.php'; // include the library for database connection
+	$query = mysql_query('SELECT video_caption,video_description,video_link,video_thumbnail FROM Lecture_Videos Order By uploaded_date desc Limit 6'); 
+	
+	$num_rows = mysql_num_rows($query); // Get the number of rows
+	if($num_rows <= 0){ // If no users exist with posted credentials print 0 like below.
+		$flag = false;
+	} else {
+		$flag = true;
+	}
+?>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- link rel="icon" href="../../favicon.ico"-->
+
+    <title>Carousel Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	
+	<style>
+		#player{
+			margin-left:200px;
+			margin-right:200px;
+		}
+		
+		a:hover img {
+			-webkit-transform:scale(1.15); /* Safari and Chrome */
+			-moz-transform:scale(1.15); /* Firefox */
+			-ms-transform:scale(1.15); /* IE 9 */
+			-o-transform:scale(1.15); /* Opera */
+			 transform:scale(1.15);
+		}
+		
+	</style>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="script/carousel_script.js"></script>
+	
+	
+	
+	<script>
+	$(document).ready(function(){
+		
+		$(".i").click(function(){
+			var w = 700;
+			var h = 345;
+			$("#player").attr("width",w);
+			$("#player").attr("height",h);
+			$("#player").attr("src",$(this).attr("alt"));
+			$("#player").attr("style","margin-bottom:50px");
+			$("#search").attr("style","margin-bottom:50px");
+		});
+
+	});
+	</script>
+    <link href="css/carousel.css" rel="stylesheet">
+  </head>
+<!-- NAVBAR
+================================================== -->
+  <body>
+    <div class="navbar-wrapper">
+      <div class="container">
+            <nav class="navbar navbar-inverse navbar-static-top">
+              <div class="container">
+                <div class="navbar-header" >
+                  <a class="navbar-brand" href="#">
+                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                    &nbsp;Home
+                  </a>
+                </div>
+                <h3 style="text-align:right;color:#FFF;">
+	                <I>Welcome Raguram</I>
+                </h3>
+              </div>
+            </nav>
+        </div>
+      </div>
+	  
+	
+	  
+    <div style="margin-top:100px">
+    <div class="container">
+	
+	<div class="input-group" id="search">
+	  <span class="input-group-addon" id="basic-addon1">
+		<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+	  </span>
+	  <input type="text" class="form-control" placeholder="Search For Lecture Videos" aria-describedby="basic-addon1">
+	</div>
+	
+	<iframe width="0" height="0" src=""
+			 id="player" align="center-left">
+	</iframe>
+	
+	<div class="row">
+	
+	  <?php
+		while($row = mysql_fetch_array($query)){
+		
+			echo "<div class="col-sm-6 col-md-4">";
+			echo "<img src='" . $row['video_thumbnail'] . "' alt='" . $row['video_link']  . "' class='i'>";
+			echo "<div class='caption'>";
+			echo "<h3>" .$row['video_caption']. "</h3>";
+			echo "<p>".$row['video_description'] . "</p>";
+			echo "</div>";
+			echo "</div>";
+			echo "</div>";
+			
+		}
+	  ?>
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+      </footer>
+
+    </div><!-- /.container -->
+	</div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="script/bootstrap.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <!-- script src="../../assets/js/vendor/holder.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- script src="../../assets/js/ie10-viewport-bug-workaround.js"></script-->
+  </body>
+</html>
