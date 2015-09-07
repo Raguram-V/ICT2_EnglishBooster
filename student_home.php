@@ -8,7 +8,7 @@ if(isset($_SESSION['student_email'])) {
 	$num_rows = mysql_num_rows($query); // Get the number of rows
 		if($num_rows > 0){ // If no users exist with posted credentials print 0 like below.
 			$fetch = mysql_fetch_array($query);
-			$student_name = $fetch['student_name'];
+			$_SESSION['student_name'] = $fetch['student_name'];
 			$_SESSION['student_id'] = $fetch['student_id'];
 		}
 
@@ -90,7 +90,7 @@ if(isset($_SESSION['student_email'])) {
                 </div>
 				<img src = 'images/logo.jpg' width='400px' height='60px' style="margin-left:250px;margin-right:100px;float:left;border-radius:10px">
                 <h3 style="text-align:right;color:#FFF;">
-	                <I>Welcome <?php echo $student_name; ?></I>
+	                <I>Welcome <?php echo $_SESSION['student_name']; ?></I>
                 </h3>
               </div>
             </nav>

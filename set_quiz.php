@@ -13,7 +13,7 @@
 	} else {
 		$fetch = mysql_fetch_array($query);
 		$quiz_id = $fetch['quiz_id'];
-		$quiz_query = mysql_query('SELECT question,correct_ans,wrong_ans_1,wrong_ans_2,wrong_ans_3 FROM Q_A WHERE quiz_id = "'.$quiz_id.'"');
+		$quiz_query = mysql_query('SELECT * FROM Q_A WHERE quiz_id = "'.$quiz_id.'"');
 		
 		$questions_rows = mysql_num_rows($quiz_query); // Get the number of rows
 		
@@ -21,7 +21,7 @@
 			echo '<?xml version="1.0" encoding="utf-8"?>';
 			echo '<QUIZ>';
 			while($row = mysql_fetch_array($quiz_query)){
-				echo '<QUESTION a1="' .$row['wrong_ans_1'] . '" a2 = "' . $row['wrong_ans_2'] . '" a3 = "' . $row['correct_ans'] . '" a4 = "' .$row['wrong_ans_3'].'">';
+				echo '<QUESTION a1="' .$row['Option_1'] . '" a2 = "' . $row['Option_2'] . '" a3 = "' . $row['Option_3'] . '" a4 = "' .$row['Option_4'].'" v1 = "' .$row['Value_1']. '" v2 = "' .$row['Value_2']. '" v3 = "' .$row['Value_3']. '" v4 = "' .$row['Value_4']. '">';
 				echo $row['question'] . '</QUESTION>';
 			}
 			echo '</QUIZ>';

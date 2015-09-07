@@ -36,8 +36,11 @@
 	
 	
 	<script>
-		
-		
+		$(document).ready(function(){
+			$('#log-out').click(function(){
+				window.location.assign('log_out.php');
+			});
+		});
 	</script>
     <link href="css/carousel.css" rel="stylesheet">
   </head>
@@ -114,6 +117,25 @@
 					<a href="take_quiz.php?quiz_type=Sentence"><img src="images/sen_structure.jpg" alt="Sentence Structure"></a>
 					<div class="caption">
 						<h3>Sentence Structure Quiz</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">	
+			<div class="col-sm-6 col-md-4">
+				<div class="thumbnail">
+					<a href="take_quiz.php?quiz_type=Prepositions"><img src="images/prepositions.jpg" alt="Sentence Structure"></a>
+					<div class="caption">
+						<h3>Preposition Quiz</h3>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-6 col-md-4">
+				<div class="thumbnail">
+					<a href="take_quiz.php?quiz_type=Articles"><img src="images/articles.jpg" alt="Sentence Structure"></a>
+					<div class="caption">
+						<h3>Articles Quiz</h3>
 					</div>
 				</div>
 			</div>

@@ -19,8 +19,10 @@
 		    $flash_file = "Adverbs/quiz.swf";
 	}else if ($quiz_type == 'Articles'){
 		    $flash_file = "Articles/quiz.swf";
-	}else if ($quiz_type == 'Preposition'){
+	}else if ($quiz_type == 'Prepositions'){
 		    $flash_file = "Preposition/quiz.swf";
+	}else if ($quiz_type == 'Sentence'){
+		    $flash_file = "Articles/quiz.swf";
 	}
 	
 ?>
@@ -68,6 +70,13 @@
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="script/carousel_script.js"></script>
+	<script>
+		$(document).ready(function(){
+				$('#log-out').click(function(){
+					window.location.assign('log_out.php');
+				});
+		});
+	</script>
     <link href="css/carousel.css" rel="stylesheet">
   </head>
   
@@ -84,7 +93,7 @@
                 </div>
 				<img src = 'images/logo.jpg' width='400px' height='60px' style="margin-left:250px;margin-right:100px;float:left;border-radius:10px">
                 <h3 style="text-align:right;color:#FFF;">
-	                <I>Welcome <?php echo $student_name; ?></I>
+	                <I>Welcome <?php echo $_SESSION['student_name']; ?></I>
                 </h3>
               </div>
             </nav>

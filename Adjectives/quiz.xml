@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QUIZ>
+<QUESTION a1="Towards " a2="Inside" a3="Along " a4="Around" v1="false" v2="false" v3="true" v4="false">We often go fishing _____ the river bank</QUESTION>
+
+
+<QUESTION a1="During" v1="true" a2="After" v2= "false" a3="Outside" v3="false" a4="Near" v4="false" >He was caught by the teacher for cheating _____the exam.</QUESTION>
+
+
+<QUESTION a1="At" v1="true" a2="Over" v2="false" a3="Of" v3="false"  a4="with" v4="false">There is no doubt that Adam is very good _____ telling jokes. </QUESTION>
+
+
+</QUIZ>
