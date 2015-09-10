@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<?php
+	session_start();
+	include 'connect.php';
+	if(isset($_SESSION['student_id'])) {
+		$student_id = $_SESSION['student_id'];
+
+		$query = mysql_query("SELECT quiz_id, score FROM Quiz_History WHERE student_id ='" . $student_id . "'"); 
+		
+		$num_rows = mysql_num_rows($query); // Get the number of rows
+			if($num_rows > 0){ // If no users exist with posted credentials print 0 like below.
+				$rows = array();
+				while($r = mysqli_fetch_assoc($query)) {
+					$rows[] = $r;
+				}
+				
+			}
+
+	}else {
+		header('Location: index.php');
+	}
+?>
+
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Performance</title>
+        <script src="script\amcharts.js" type="text/javascript"></script>
+        <script src="script\serial.js" type="text/javascript"></script>
+
+    </head>
+
+    <body>
+		<p><?php echo json_encode($rows); ?></p>
+    </body>
+
+</html>

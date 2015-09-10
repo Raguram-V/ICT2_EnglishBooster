@@ -1,44 +1,102 @@
+<?php
+	session_start();
+	include 'connect.php';
+
+	//header('Location: index.php');
+
+?>
+
+
 <html>
   <head>
-    <title>Upload Video</title>
+    <title>Make Quiz</title>
 
     <!-- Bootstrap core CSS -->
 	<!-- Latest compiled and minified CSS -->
 	
 	 
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
-    <link rel="stylesheet" href="http://bootsnipp.com/dist/bootsnipp.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- Bootstrap core CSS -->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-	<style>
-		
-	</style>
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="script/carousel_script.js"></script>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    
+    
 	<script>
 		$(document).ready(function(){
-			var res = $('#q_values').text();
+			var res = "s|";
+			var ques_num = 0;
+			
+			$('#q_lbl').html(ques_num + 1 + '.Question');
+			
 			$('#add').click(function(e){
-				e.preventdefault();
-				var qn = $('#qn').text();
-				var ca = $('#ca').text();
-				var wa1 = $('#wa1').text();
-				var wa2 = $('#wa2').text();
-				var wa3 = $('#wa3').text();
-				var wa4 = $('#wa4').text();
+				e.preventDefault();
 				
-				res = res + ca + wa1 + wa2 + wa3 + wa4;
-				
-				$('#q_values').html(res);
-				
+				collectFormValues();
+				ques_num = ques_num + 1;
+					if (ques_num <= 3) {
+						$('#q_lbl').html(ques_num + 1 + '.Question');
+						$('#q_info').html('Question ' + ques_num + ' is Recorded Successfully') ;
+						$('#q_info').css('display','block');
+						resetForm();
+					}else {
+						$('#q_info').html('Please Upload Quiz..') ;
+						$('#q_info').css('display','block');
+						$('#q_info').css('background-color','yellow');
+					}
 			});
+			
+			$('#quiz').on('submit',function(e){
+				alert(ques_num + '');
+				if(ques_num < 2){
+					e.preventDefault();
+					$('#q_info').html('Enter 3 Questions to make a Quiz') ;
+					$('#q_info').css('display','block');
+					$('#q_info').css('background-color','yellow');
+					
+					collectFormValues();
+					ques_num = ques_num + 1;
+					$('#q_lbl').html(ques_num + 1 + '.Question');
+					resetForm();
+				}
+			});
+			
+			function resetForm(){
+				$('#qn').val('');
+				$('#op1').val('');
+				$('#op2').val('');
+				$('#op3').val('');
+				$('#op4').val('');
+				
+				$('#val1').val('');
+				$('#val2').val('');
+				$('#val3').val('');
+				$('#val4').val('');
+			}
+			
+			function collectFormValues(){
+				
+				var q = $('#qn').val();
+				var op_1 = $('#op1').val();
+				var op_2 = $('#op2').val();
+				var op_3 = $('#op3').val();
+				var op_4 = $('#op4').val();
+				
+				var val_1 = $('#val1').val();
+				var val_2 = $('#val2').val();
+				var val_3 = $('#val3').val();
+				var val_4 = $('#val4').val();
+				
+				res = res + q + ',' + op_1 + ',' + val_1 + ',' + op_2 + ',' + val_2 + ',' + op_3 + ',' + val_3 + ',' + op_4 + ',' + val_4 + '|';
+				
+				$('#quiz_data').val(res);
+			}
+			
 		});
 	</script>
-	
-    <link href="css/carousel.css" rel="stylesheet">
   </head>
   
   <body>
@@ -90,61 +148,79 @@
         </nav>
 	</div>
 		
-	<div class="container" style="margin-top:100px">
-		<form style="margin-left:100px;margin-right:100px;" class='form-horizontal'>
-		    <div>   
-				<div class="form-group" >
-					<label for="exampleInputEmail1">Quiz Type:</label>
-					<select class="form-control" id="userType" name="usertype" required>
-					  <option value="student" selected="Selected">A1</option>
-					  <option value="teacher">A2</option>
-					  <option value="parent">A3</option>
-					</select>
-				</div>
-					  
-				<div class="form-group">
-					<label for="exampleInputPassword1">1. Question</label>
-					<input type="text" class="form-control" id="qn" placeholder="Question 1">
-				</div>
-			  
-				<div class="form-group">
-					<label for="exampleInputPassword1">Correct Answer</label>
-					<input type="text" class="form-control" id="ca" placeholder="Enter the Correct Answer">
-				</div>
-			  
-				<div class="form-group">
-					<label for="exampleInputPassword1">Wrong Answer 1</label>
-					<input type="text" class="form-control" id="wa1" placeholder="Enter Wrong Answer 1">
-				</div>
-			  
-				<div class="form-group">
-					<label for="exampleInputPassword1">Wrong Answer 2</label>
-					<input type="text" class="form-control" id="wa2" placeholder="Enter Wrong Answer 2">
-				</div>
-			  
-				<div class="form-group">
-					<label for="exampleInputPassword1">Wrong Answer 3</label>
-					<input type="text" class="form-control" id="wa3" placeholder="Enter Wrong Answer 3">
-				</div>
-					  
-				<div class="form-group">
-					<label for="exampleInputPassword1">Wrong Answer 4</label>
-					<input type="text" class="form-control" id="wa4" placeholder="Enter Wrong Answer 4">
-				</div>
+	<div class="container">
+		<h2 style="margin-left:30%;margin-right:30%;text-align:center">Quiz Template<h2>
+		<h3 style='display:none' id='q_info'></h3>
+		<form style="margin-left:100px;margin-right:100px;" class='form-horizontal' id='quiz' action="upload_quiz.php" method='post'>
+		    
+			<div class="form-group" >
+				<label for="exampleInputEmail1">Quiz Type:</label>
+				<select class="form-control" id="testType" name="testType" required>
+				  <option value="Adjectives" selected="Selected">Adjectives</option>
+				  <option value="Adverbs">Adverbs</option>
+				  <option value="Articles">Articles</option>
+				  <option value="Prepositions">Preposition</option>
+				  <option value="Sentence Structure">Sentence Structure</option>
+				</select>
 			</div>
-		 
-		    <div class="form-group">
-				<button style="display:block" class="btn btn-primary" id='add'>Add Question</button>
-		    </div>
-		 
-		    <div class="form-group">
-				<button type="submit" style="display:block" class="btn btn-success">Upload Quiz</button>
-		    </div>
+				  
+			<div class="form-group">
+				<label for="exampleInputPassword1" id='q_lbl'></label>
+				<input type="text" class="form-control" id="qn" placeholder="Question 1">
+			</div>
+		  
+			<div class="form-group">
+				<label for="exampleInputPassword1">Option 1</label>
+				<input type="text" class="form-control" id="op1" placeholder="Enter option 1">
+			</div>
 			
 			<div class="form-group">
-				<p id='q_values'></p>
-		    </div>
-		 
+				<label for="exampleInputPassword1">Value 1</label>
+				<input type="text" class="form-control" id="val1" placeholder="Enter True or False">
+			</div>
+		  
+			<div class="form-group">
+				<label for="exampleInputPassword1">Option 2</label>
+				<input type="text" class="form-control" id="op2" placeholder="Enter option 2">
+			</div>
+			
+			<div class="form-group">
+				<label for="exampleInputPassword1">Value 2</label>
+				<input type="text" class="form-control" id="val2" placeholder="Enter True or False">
+			</div>
+		  
+			<div class="form-group">
+				<label for="exampleInputPassword1">Option 3</label>
+				<input type="text" class="form-control" id="op3" placeholder="Enter option 3">
+			</div>
+		  
+			<div class="form-group">
+				<label for="exampleInputPassword1">Value 3</label>
+				<input type="text" class="form-control" id="val3" placeholder="Enter True or False">
+			</div>
+			
+			<div class="form-group">
+				<label for="exampleInputPassword1">Option 4</label>
+				<input type="text" class="form-control" id="op4" placeholder="Enter option 4">
+			</div>
+		  
+			<div class="form-group">
+				<label for="exampleInputPassword1">Value 4</label>
+				<input type="text" class="form-control" id="val4" placeholder="Enter True or False">
+			</div>
+			
+			
+			<input id="quiz_data" name ='q_data' style='display:none'>
+			
+			<div style='margin-left:200px;margin-right:200px;text-align:center'>
+				<div style='display:inline'>
+					<button class="btn btn-success" id='add'>Add Question</button>
+				</div>
+				
+				<div style='display:inline'>
+					<button type="submit"  class="btn btn-success" id='submit_quiz'>Upload Quiz</button>
+				</div>
+			</div>
 		</form>
       </div>
 		
